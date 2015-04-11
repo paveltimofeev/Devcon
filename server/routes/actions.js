@@ -22,14 +22,34 @@ router.get('/', function( req, res, next ){
 		host : os.hostname(),
 		messages:[],
 		notifications:[],
-		tasks:[],
-		data : configService.getCachedActionSync() 
+		tasks:
+		[
+			{ name : "Add actions", progress: 95 },
+			{ name : "Add links",   progress: 100 },
+			{ name : "Add hosts monitoring",  progress:  15 },
+			{ name : "Add system monitoring", progress:   0 },
+			{ name : "Add proc monitoring",   progress:   1 },
+			{ name : "Add files monitoring",  progress:   0 },
+			{ name : "Edit configurations",  progress:   0 }
+		],
+		data : configService.getCachedActionSync(),
+		error: null
 	};
 	
 	/* immitation of resonse time */
-	for(var i=0;i<viewModel.data.monitoring_url.length;i++){
-		viewModel.data.monitoring_url[i].responseTime = _.random( 100 ); 
-	}
+			for(var i=0;i<viewModel.data.monitoring_url.length;i++){
+
+				viewModel.data.monitoring_url[i].state = (['green', 'green', 'green', 'green', 'green', 'green','green', 'yellow', 'yellow', 'red'])[_.random( 9 )]; 
+				viewModel.data.monitoring_url[i].responseTime = _.random( 100 ); 
+			}
+			
+			if( _.random( 10 ) == 1){
+				
+				viewModel.error = new Error('Danger alert preview. This alert is dismissable. A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.');
+			}
+	/* */
+	
+	
 	
 	res.render( view, viewModel );
 });

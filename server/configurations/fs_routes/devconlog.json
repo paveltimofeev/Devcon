@@ -1,0 +1,5 @@
+{
+    "name" : "Devcon logs",
+    "route": "/logs/devcon/",
+    "path" : "/logs/devcon.log"
+}
