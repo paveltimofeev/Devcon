@@ -1,0 +1,4 @@
+{
+	"name" : "open calc",
+	"cmd"  : "/executable_scripts/run-calc.cmd"
+}
