@@ -2,15 +2,26 @@ var _ = require('underscore');
 require('waitjs');
 
 var monitoredResources = [];
-var monitorInterval = '10s';
+var monitorInterval = '1s';
+
+var _monitoredResourceIndex = 0;
+
+
+
 
 repeat( monitorInterval, function() {
 	
-    _.each( monitoredResources, function( res ){
+	if(monitoredResources.length > 0)
+	{
+		_monitoredResourceIndex++;
+		if(_monitoredResourceIndex >= monitoredResources.length)
+			_monitoredResourceIndex = 0;
 		
+		var res = monitoredResources[ _monitoredResourceIndex ];
 		if( res.processor )
 			res.processor( res.resource );
-	});	
+	}
+	
 }, true );
 
 
