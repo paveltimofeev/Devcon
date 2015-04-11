@@ -1,80 +1,65 @@
+var os = require('os');
+var path = require('path');
 var express = require('express');
 var router = express.Router();
 
-var glob = require('glob');
-var path = require('path');
-var _ = require('underscore');
-var jf = require('jsonfile')
-var exec = require('child_process').exec;
-var fs = require('fs');
+var configService 	 = require( path.join( __dirname, '..', 'devcon', 'configService.js' ));
+var executionService = require( path.join( __dirname, '..', 'devcon', 'executionService.js' ));
 
-var cached_config = null;
-var config_folder = path.join(__dirname, '..', 'configurations');
-var config_pattern = '**/*.json';
+configService.init( path.join( __dirname, '..', 'configurations' ), '**/*.json' );
+configService.getActions();	
+
+var view = 'devcon';
 
 
-function createAction( filepath, cb ){
-	
-	var obj = jf.readFileSync( filepath );
-	var folders = path.dirname( path.join( '..', filepath )).split( path.sep );
-	var type = folders[ folders.length-1 ];
-	
-	cb( type, obj );
-}
-
-function getAction( cb ){
-	
-
-	glob( config_pattern, { cwd: config_folder }, function ( err, files ) {
-
-		var data = [];
-			
-		for( var i=0; i<files.length; i++ ){
-			
-			createAction( path.join( config_folder, files[i] ), function( type, obj ){
-				
-				if( ! data[ type ])
-					data[ type ] = [];
-				
-				data[ type ].push( obj );
-			});
-		}
-		
-		cb( err, data );
-	});	
-}
 
 router.get('/', function( req, res, next ){
 	
-	res.render( 'actions', { title: "Loaded actions", data: cached_config } );
+	var viewModel = 
+	{ 
+		title: 'Developer console', 
+		host : os.hostname(),
+		messages:[],
+		notifications:[],
+		tasks:[],
+		data : configService.getCachedActionSync() 
+	};
+	
+	res.render( view, viewModel );
+});
+
+router.get('/refresh/', function( req, res, next ){
+	
+	configService.getActions();	
+	res.redirect( '/devcon' );
+});
+
+router.get('/edit/:config', function( req, res, next ){
+	
+	var config = req.params.config;
+	console.log( 'edit:' + config );
+	res.redirect( '/devcon' );
 });
 
 router.post('/run/:act', function( req, res, next ){
 
-	var act = req.params.act;
+	var act_name = req.params.act;
+	console.log( 'run:' + act_name );
 	
-	var actionConfig = _.find( cached_config.actions, function( action ){
+	configService.findCachedAction( act_name, function(err, action ){
 		
-		return action.name == act;
+		if( err ){
+			
+			console.error( err );
+			res.redirect( '/devcon' );
+		}
+		else {
+			
+			executionService.executeAction( action );
+			res.redirect( '/devcon' );
+		}
 	});
-	
-	console.log( 'act:' + act );
-	console.log( 'name:' + actionConfig.name );
-	console.log( 'cmd :' + actionConfig.cmd );
-	
-	var relPath = path.join( __dirname, '..', actionConfig.cmd );
-	fs.exists( relPath, function( exists ) { 
-	  
-		var options = { cwd : path.join( __dirname, '..') };
-		var command = exists ? relPath : actionConfig.cmd;
-		
-		console.log( 'exec:' + command);
-		var child = exec( command, options);
-		res.redirect( '/actions' );
-	}); 
 });
 
-
-getAction( function( err, data ){ cached_config = data; } );
 
 module.exports = router;

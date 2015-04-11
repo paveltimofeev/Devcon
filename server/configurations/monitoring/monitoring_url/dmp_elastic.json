@@ -1,0 +1,8 @@
+{
+	"name" : "Elasticsearch",
+	"groupname": "Business",
+	"icon" : "fa-qrcode",
+	"tooltip": "Monitor elasticsearch",
+	"url"  : "http://localhost:8090",
+	"okstatus"  : 200
+}

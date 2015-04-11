@@ -1,8 +1,8 @@
 {
 	"name" : "Patico.PRO",
 	"groupname": "Personal",
-	"icon" : "www",
-	"tooltip": "Monitor availability of www.patico.pro",
+	"icon" : "fa-cloud",
+	"tooltip": "Monitor availability of patico.pro",
 	"url"  : "http://www.patico.pro",
 	"okstatus"  : 200
 }

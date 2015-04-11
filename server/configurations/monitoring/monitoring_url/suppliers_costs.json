@@ -1,0 +1,8 @@
+{
+	"name" : "Supplier costs",
+	"groupname": "Personal",
+	"icon" : "fa-dollar",
+	"tooltip": "Monitor suppriers' costs",
+	"url"  : "http://localhost:5858/costs/check",
+	"okstatus"  : 200
+}

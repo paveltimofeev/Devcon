@@ -1,0 +1,8 @@
+{
+	"name" : "Auto Posting Service",
+	"groupname": "Personal",
+	"icon" : "fa-expand",
+	"tooltip": "Sync blog & pinterest",
+	"url"  : "http://localhost:9050/state",
+	"okstatus"  : 200
+}

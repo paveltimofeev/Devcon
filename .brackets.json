@@ -1,0 +1,9 @@
+{
+    "jscodehints.detectedExclusions": [
+        "C:/Git/Repositories/Devcon/server/public/template/plugins/ckeditor/build-config.js",
+        "C:/Git/Repositories/Devcon/server/public/template/plugins/ckeditor/ckeditor.js",
+        "C:/Git/Repositories/Devcon/server/routes/actions.js",
+        "C:/Git/Repositories/Devcon/server/public/template/plugins/colorpicker/bootstrap-colorpicker.js",
+        "C:/Git/Repositories/Devcon/server/public/template/plugins/colorpicker/bootstrap-colorpicker.min.js"
+    ]
+}
