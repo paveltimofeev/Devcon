@@ -1,4 +1,5 @@
 template
+server/configurations/actions
 node_modules
 npm-debug.log
 us.stackdump
