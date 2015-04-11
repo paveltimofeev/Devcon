@@ -1,5 +1,6 @@
 var os = require('os');
 var path = require('path');
+var _ = require('underscore');
 var express = require('express');
 var router = express.Router();
 
@@ -24,6 +25,11 @@ router.get('/', function( req, res, next ){
 		tasks:[],
 		data : configService.getCachedActionSync() 
 	};
+	
+	/* immitation of resonse time */
+	for(var i=0;i<viewModel.data.monitoring_url.length;i++){
+		viewModel.data.monitoring_url[i].responseTime = _.random( 100 ); 
+	}
 	
 	res.render( view, viewModel );
 });

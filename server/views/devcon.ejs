@@ -309,7 +309,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <span class="info-box-text">STATUS <%= data.monitoring_url[i].okstatus %></span>
                   <span class="info-box-number"><%= data.monitoring_url[i].name %></span>
                   <div class="progress">
-                    <div class="progress-bar" style="width: 70%"></div>
+                    <div class="progress-bar" style="width: <%= data.monitoring_url[i].responseTime %>%"></div>
                   </div>
                   <span class="progress-description">
                     <%= data.monitoring_url[i].tooltip %>
