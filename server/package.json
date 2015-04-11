@@ -15,6 +15,7 @@
     "jsonfile": "^2.0.0",
     "morgan": "~1.5.1",
     "serve-favicon": "~2.2.0",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "waitjs": "^0.2.0"
   }
 }

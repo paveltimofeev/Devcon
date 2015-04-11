@@ -6,13 +6,14 @@ var router = express.Router();
 
 var configService 	 = require( path.join( __dirname, '..', 'devcon', 'configService.js' ));
 var executionService = require( path.join( __dirname, '..', 'devcon', 'executionService.js' ));
+var monitoringService = require( path.join( __dirname, '..', 'devcon', 'monitoringService.js' ));
+
 
 configService.init( path.join( __dirname, '..', 'configurations' ), '**/*.json' );
 configService.getActions();	
 
+
 var view = 'devcon';
-
-
 
 router.get('/', function( req, res, next ){
 	
@@ -35,6 +36,11 @@ router.get('/', function( req, res, next ){
 		data : configService.getCachedActionSync(),
 		error: null
 	};
+	
+	monitoringService.setMonitoredResources( 
+		configService.getCachedActionSync().monitoring_url, 
+		function( resource ){ console.log( '[Monitoring] %s', resource.name ); } );
+
 	
 	/* immitation of resonse time */
 			for(var i=0;i<viewModel.data.monitoring_url.length;i++){
