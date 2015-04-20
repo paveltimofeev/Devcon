@@ -4,5 +4,6 @@
 	"icon" : "fa-globe",
 	"tooltip": "Monitor anime-figures.com",
 	"url"  : "http://anime-figures.com",
-	"okstatus"  : 200
+	"status"  : "",
+	"state" : "yellow"
 }

@@ -3,6 +3,7 @@
 	"groupname": "Personal",
 	"icon" : "fa-dollar",
 	"tooltip": "Monitor suppriers' costs",
-	"url"  : "http://localhost:5858/costs/check",
-	"okstatus"  : 200
+	"url"  : "http://localhost:8001/costs/check",
+	"status"  : "",
+	"state" : "yellow"
 }

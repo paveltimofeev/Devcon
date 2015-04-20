@@ -33,6 +33,27 @@ module.exports.findCachedAction = function( name, cb ){
 	cb( !foundconfig ?  new Error( name + ' not found' ) : null, foundconfig );
 }
 
+module.exports.setMonitoringUrlState = function( name, status, color, responseTime, changedCallback){
+	
+	for(var i=0;i<cached_config.monitoring_url.length;i++)
+	{
+		if( cached_config.monitoring_url[i].name === name )
+		{
+			var hasChanges = false;
+
+			if( cached_config.monitoring_url[i].state != color | cached_config.monitoring_url[i].status != status )
+				hasChanges = true;
+			
+			cached_config.monitoring_url[i].state = color;
+			cached_config.monitoring_url[i].status = status;
+			cached_config.monitoring_url[i].responseTime = responseTime;
+			
+			if( changedCallback && hasChanges )
+				changedCallback( name );
+		}
+	}
+}
+
 module.exports.init = function ( folder, pattern ){
 
 	config_folder  = folder;

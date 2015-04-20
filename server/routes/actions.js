@@ -1,6 +1,8 @@
+var util = require('util');
 var os = require('os');
 var path = require('path');
 var _ = require('underscore');
+var request = require('request');
 var express = require('express');
 var router = express.Router();
 
@@ -34,28 +36,12 @@ router.get('/', function( req, res, next ){
 			{ name : "Edit configurations",  progress:   0 }
 		],
 		data : configService.getCachedActionSync(),
-		error: null
+		error: null // new Error('Danger alert preview. This alert is dismissable. A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.');
 	};
 	
 	monitoringService.setMonitoredResources( 
 		configService.getCachedActionSync().monitoring_url, 
-		function( resource ){ console.log( '[Monitoring] %s', resource.name ); } );
-
-	
-	/* immitation of resonse time */
-			for(var i=0;i<viewModel.data.monitoring_url.length;i++){
-
-				viewModel.data.monitoring_url[i].state = (['green', 'green', 'green', 'green', 'green', 'green','green', 'yellow', 'yellow', 'red'])[_.random( 9 )]; 
-				viewModel.data.monitoring_url[i].responseTime = _.random( 100 ); 
-			}
-			
-			if( _.random( 10 ) == 1){
-				
-				viewModel.error = new Error('Danger alert preview. This alert is dismissable. A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.');
-			}
-	/* */
-	
-	
+		monitoringService.processor );
 	
 	res.render( view, viewModel );
 });

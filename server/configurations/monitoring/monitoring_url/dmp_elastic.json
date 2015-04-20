@@ -4,5 +4,6 @@
 	"icon" : "fa-qrcode",
 	"tooltip": "Monitor elasticsearch",
 	"url"  : "http://localhost:8090",
-	"okstatus"  : 200
+	"status"  : "",
+	"state" : "yellow"
 }

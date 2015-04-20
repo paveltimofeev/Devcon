@@ -311,7 +311,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="info-box bg-<%= data.monitoring_url[i].state %>">
                 <span class="info-box-icon"><i class="fa <%= data.monitoring_url[i].icon %>"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">STATUS <%= data.monitoring_url[i].okstatus %></span>
+                  <span class="info-box-text"><%= data.monitoring_url[i].status %></span>
                   <span class="info-box-number"><%= data.monitoring_url[i].name %></span>
                   <div class="progress">
                     <div class="progress-bar" style="width: <%= data.monitoring_url[i].responseTime %>%"></div>

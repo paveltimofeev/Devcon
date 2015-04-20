@@ -4,5 +4,6 @@
 	"icon" : "fa-github",
 	"tooltip": "Monitor CGK addons website",
 	"url"  : "http://paveltimofeev.github.io/Unity-CustomGarvitationKit-Addons",
-	"okstatus"  : 200
+	"status"  : "",
+	"state" : "yellow"
 }

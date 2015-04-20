@@ -4,6 +4,19 @@
         "C:/Git/Repositories/Devcon/server/public/template/plugins/ckeditor/ckeditor.js",
         "C:/Git/Repositories/Devcon/server/routes/actions.js",
         "C:/Git/Repositories/Devcon/server/public/template/plugins/colorpicker/bootstrap-colorpicker.js",
-        "C:/Git/Repositories/Devcon/server/public/template/plugins/colorpicker/bootstrap-colorpicker.min.js"
+        "C:/Git/Repositories/Devcon/server/public/template/plugins/colorpicker/bootstrap-colorpicker.min.js",
+        "C:/Git/Repositories/Devcon/server/public/template/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js",
+        "C:/Git/Repositories/Devcon/server/public/template/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.js",
+        "C:/Git/Repositories/Devcon/server/public/template/plugins/chartjs/Chart.js",
+        "C:/Git/Repositories/Devcon/server/devcon/configService.js",
+        "C:/Git/Repositories/Devcon/server/public/template/plugins/datatables/dataTables.bootstrap.js",
+        "C:/Git/Repositories/Devcon/server/public/template/plugins/datepicker/bootstrap-datepicker.js",
+        "C:/Git/Repositories/Devcon/server/public/template/plugins/daterangepicker/daterangepicker.js",
+        "C:/Git/Repositories/Devcon/server/public/template/plugins/ckeditor/styles.js",
+        "C:/Git/Repositories/Devcon/server/public/template/plugins/fastclick/fastclick.js",
+        "C:/Git/Repositories/Devcon/server/public/template/plugins/flot/excanvas.min.js",
+        "C:/Git/Repositories/Devcon/server/public/template/plugins/fastclick/fastclick.min.js",
+        "C:/Git/Repositories/Devcon/stub/stubserver.js",
+        "C:/Git/Repositories/Devcon/server/public/template/plugins/fullcalendar/fullcalendar.js"
     ]
 }

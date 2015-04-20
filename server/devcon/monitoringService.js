@@ -1,4 +1,6 @@
 var _ = require('underscore');
+var util = require('util');
+var request = require('request');
 require('waitjs');
 
 var monitoredResources = [];
@@ -43,4 +45,29 @@ module.exports.setMonitoredResources = function( resources, processor ) {
 	_.each( resources, function( resource ){
 		addMonitoredResource( resource, processor );
 	});
+};
+
+
+module.exports.processor = function( resource ){ 
+			
+			request.head(resource.url, function( err, res, body ){
+				
+				if( err ){
+					
+					configService.setMonitoringUrlState( resource.name, err.code, 'red', 0 , function(){
+						///rpc
+					});
+					util.log( '[Monitoring] ' + err.code + ' ' + resource.name );
+				}
+				
+				if( res ){
+					
+					console.log( res );
+					
+					configService.setMonitoringUrlState( resource.name, 'STATUS ' + res.statusCode,  res.statusCode == 200 ? 'green' : 'yellow', 75, function(){
+						///rpc
+					});
+					util.log( '[Monitoring] ' + res.statusCode + ' ' + resource.name );
+				}
+			});
 };

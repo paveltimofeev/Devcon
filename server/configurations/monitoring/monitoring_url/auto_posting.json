@@ -3,6 +3,7 @@
 	"groupname": "Personal",
 	"icon" : "fa-expand",
 	"tooltip": "Sync blog & pinterest",
-	"url"  : "http://localhost:9050/state",
-	"okstatus"  : 200
+	"url"  : "http://localhost:8001",
+	"status"  : "",
+	"state" : "yellow"
 }
