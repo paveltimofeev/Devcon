@@ -19,7 +19,7 @@ function createAction( filepath, cb ){
 module.exports.getCachedActionSync = function(){
 	
 	return cached_config;
-}
+};
 
 module.exports.findCachedAction = function( name, cb ){
 	
@@ -31,7 +31,7 @@ module.exports.findCachedAction = function( name, cb ){
 	console.log( 'found: %j', foundconfig );	
 			
 	cb( !foundconfig ?  new Error( name + ' not found' ) : null, foundconfig );
-}
+};
 
 module.exports.setMonitoringUrlState = function( name, status, color, responseTime, changedCallback){
 	
@@ -52,13 +52,13 @@ module.exports.setMonitoringUrlState = function( name, status, color, responseTi
 				changedCallback( name );
 		}
 	}
-}
+};
 
 module.exports.init = function ( folder, pattern ){
 
 	config_folder  = folder;
 	config_pattern = pattern;
-}
+};
 
 module.exports.getActions = function ( ){
 	
@@ -79,4 +79,4 @@ module.exports.getActions = function ( ){
 		
 		cached_config = data;
 	});	
-}
+};

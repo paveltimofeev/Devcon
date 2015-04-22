@@ -6,14 +6,16 @@ var request = require('request');
 var express = require('express');
 var router = express.Router();
 
-var configService 	 = require( path.join( __dirname, '..', 'devcon', 'configService.js' ));
-var executionService = require( path.join( __dirname, '..', 'devcon', 'executionService.js' ));
-var monitoringService = require( path.join( __dirname, '..', 'devcon', 'monitoringService.js' ));
+var devcon = path.join( __dirname, '..', 'devcon');
+var configService 	  = require( path.join( devcon, 'configService.js' ));
+var executionService  = require( path.join( devcon, 'executionService.js' ));
+var monitoringService = require( path.join( devcon, 'monitoringService.js' ));
+var taskService       = require( path.join( devcon, 'taskService.js' ));
+var u                 = require( path.join( devcon, 'utility.js' ));
 
 
 configService.init( path.join( __dirname, '..', 'configurations' ), '**/*.json' );
 configService.getActions();	
-
 
 var view = 'devcon';
 
@@ -25,25 +27,37 @@ router.get('/', function( req, res, next ){
 		host : os.hostname(),
 		messages:[],
 		notifications:[],
-		tasks:
-		[
-			{ name : "Add actions", progress: 95 },
-			{ name : "Add links",   progress: 100 },
-			{ name : "Add hosts monitoring",  progress:  15 },
-			{ name : "Add system monitoring", progress:   0 },
-			{ name : "Add proc monitoring",   progress:   1 },
-			{ name : "Add files monitoring",  progress:   0 },
-			{ name : "Edit configurations",  progress:   0 }
-		],
+		tasks: taskService.getTasks(),
 		data : configService.getCachedActionSync(),
 		error: null // new Error('Danger alert preview. This alert is dismissable. A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.');
 	};
 	
 	monitoringService.setMonitoredResources( 
-		configService.getCachedActionSync().monitoring_url, 
-		monitoringService.processor );
-	
-	res.render( view, viewModel );
+		configService.getCachedActionSync().monitoring_url,
+        function( resource ){
+
+            request.head(resource.url, function( err, res, body ){
+
+                if( err ){
+
+                    configService.setMonitoringUrlState( resource.name, err.code, 'red', 0 , function(){
+                        ///rpc
+                    });
+                    util.log( '[Monitoring] ' + err.code + ' ' + resource.name );
+                }
+
+                if( res ){
+
+                    configService.setMonitoringUrlState( resource.name, 'STATUS ' + res.statusCode,  res.statusCode == 200 ? 'green' : 'yellow', 75, function(){
+                        ///rpc
+                    });
+                    util.log( '[Monitoring] ' + res.statusCode + ' ' + resource.name );
+                }
+            });
+        }
+    );
+
+    u.response( res, view, viewModel);
 });
 
 router.get('/refresh/', function( req, res, next ){
